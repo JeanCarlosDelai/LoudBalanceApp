@@ -1,0 +1,9 @@
+#terraform
+.terraform/
+*.backup
+*.hcl
+*.tfstate
+*.out
+*.info
+*.txt
+*.pub

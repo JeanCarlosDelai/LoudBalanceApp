@@ -1,7 +1,7 @@
 resource "aws_vpc" "main" {
   cidr_block = var.cidr_block_vpc
 
-   provisioner "local-exec" {
+  provisioner "local-exec" {
     command = "echo ${self.id} >> vpc_id.txt"
   }
 }

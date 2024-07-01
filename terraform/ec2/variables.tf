@@ -9,6 +9,6 @@ variable "subnet_2_id" {
 }
 
 variable "security_group_id" {
-  description = "The name of the security group"
+  description = "Secury Group ID"
   type        = string
 }

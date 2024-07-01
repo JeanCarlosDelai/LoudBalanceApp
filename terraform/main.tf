@@ -35,8 +35,17 @@ module "subnets" {
 }
 
 module "ec2" {
-  source              = "./ec2"
-  subnet_1_id         = module.subnets.subnet_1_id
-  subnet_2_id         = module.subnets.subnet_2_id
+  source            = "./ec2"
+  subnet_1_id       = module.subnets.subnet_1_id
+  subnet_2_id       = module.subnets.subnet_2_id
   security_group_id = module.vpc.security_group_id
+}
+
+module "loudBalance" {
+  source             = "./loudBalance"
+  security_group_id  = module.vpc.security_group_id
+  subnets            = [module.subnets.subnet_1_id, module.subnets.subnet_2_id]
+  vpc_id             = module.vpc.vpc_id
+  LoudBalanceApp1_id = module.ec2.instance_id_1
+  LoudBalanceApp2_id = module.ec2.instance_id_2
 }

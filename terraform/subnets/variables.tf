@@ -19,12 +19,12 @@ variable "cidr_block_subnet_2" {
 }
 
 variable "vpc_id" {
-  description = ""
+  description = "VPC ID"
   type        = string
 }
 
 variable "route_table_id" {
-  description = ""
+  description = "Route Table ID"
   type        = string
 }
 

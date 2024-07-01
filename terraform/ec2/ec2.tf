@@ -1,5 +1,5 @@
-resource "aws_key_pair" "LoudBalanceApp1_key" {
-  key_name   = "LoudBalanceApp1_key"
+resource "aws_key_pair" "LoudBalanceApp_key" {
+  key_name   = "LoudBalanceApp"
   public_key = local.public_key
 }
 
@@ -9,6 +9,7 @@ resource "aws_instance" "LoudBalanceApp1" {
   subnet_id                   = var.subnet_1_id
   security_groups             = [var.security_group_id]
   associate_public_ip_address = true
+  key_name                    = aws_key_pair.LoudBalanceApp_key.key_name
 
   user_data = <<-EOF
               #!/bin/bash
@@ -19,6 +20,8 @@ resource "aws_instance" "LoudBalanceApp1" {
               cd /var/www/html
               git clone https://github.com/JeanCarlosDelai/LoudBalanceApp-1.git
               cp LoudBalanceApp-1/index.html /var/www/html/index.html
+              sudo chown -R $USER .git
+              sudo chown -R $USER /var/www/html
                 EOF
 
   tags = {
@@ -40,12 +43,12 @@ resource "aws_key_pair" "LoudBalanceApp2_key" {
 }
 
 resource "aws_instance" "LoudBalanceApp2" {
-  ami                         = "ami-053602453dbcba9be" 
+  ami                         = "ami-053602453dbcba9be"
   instance_type               = "t2.micro"
   subnet_id                   = var.subnet_2_id
   security_groups             = [var.security_group_id]
   associate_public_ip_address = true
-  key_name                    = aws_key_pair.LoudBalanceApp2_key.key_name
+  key_name                    = aws_key_pair.LoudBalanceApp_key.key_name
 
   user_data = <<-EOF
               #!/bin/bash
@@ -56,6 +59,8 @@ resource "aws_instance" "LoudBalanceApp2" {
               cd /var/www/html
               git clone https://github.com/JeanCarlosDelai/LoudBalanceApp-2.git
               cp LoudBalanceApp-2/index.html /var/www/html/index.html
+              sudo chown -R $USER .git
+              sudo chown -R $USER /var/www/html
                 EOF
 
   tags = {
