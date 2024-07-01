@@ -10,6 +10,10 @@ resource "aws_lb" "app_lb" {
   tags = {
     Name = "app-lb"
   }
+
+   provisioner "local-exec" {
+    command = "echo ${self.dns_name} >> public_ip_LoudBalance.txt"
+  }
 }
 
 resource "aws_lb_target_group" "app_tg" {

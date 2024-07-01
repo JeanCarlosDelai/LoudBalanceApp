@@ -31,10 +31,6 @@ resource "aws_instance" "LoudBalanceApp1" {
   provisioner "local-exec" {
     command = "echo ${self.public_ip} >> public_ip_LoudBalanceApp1.txt"
   }
-
-  provisioner "local-exec" {
-    command = "echo ${self.id} >> id_LoudBalanceApp1.txt"
-  }
 }
 
 resource "aws_key_pair" "LoudBalanceApp2_key" {
@@ -69,10 +65,6 @@ resource "aws_instance" "LoudBalanceApp2" {
 
   provisioner "local-exec" {
     command = "echo ${self.public_ip} >> public_ip_LoudBalanceApp2.txt"
-  }
-
-  provisioner "local-exec" {
-    command = "echo ${self.id} >> id_LoudBalanceApp2.txt"
   }
 }
 
